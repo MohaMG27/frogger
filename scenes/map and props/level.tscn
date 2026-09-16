@@ -1,0 +1,81 @@
+[gd_scene format=3 uid="uid://bneu8k4y643s8"]
+
+[ext_resource type="Script" uid="uid://cyfj5ts21rd70" path="res://scenes/map and props/level.gd" id="1_co8bd"]
+[ext_resource type="PackedScene" uid="uid://dy4yhdg8s883i" path="res://scenes/map and props/props2.tscn" id="2_emea3"]
+[ext_resource type="Texture2D" uid="uid://doghmovcgeltw" path="res://graphics/map.png" id="2_wc0w5"]
+[ext_resource type="PackedScene" uid="uid://c2006esdnomul" path="res://scenes/map and props/props.tscn" id="3_emea3"]
+[ext_resource type="PackedScene" uid="uid://cx11nhgtfqugf" path="res://scenes/player/player.tscn" id="3_wc0w5"]
+[ext_resource type="PackedScene" uid="uid://djvjhm0ea818f" path="res://scenes/map and props/border.tscn" id="5_40uiw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_co8bd"]
+size = Vector2(382, 10)
+
+[node name="Level" type="Node2D" unique_id=1430491015]
+script = ExtResource("1_co8bd")
+metadata/_edit_vertical_guides_ = [-193.0]
+
+[node name="Map" type="Sprite2D" parent="." unique_id=1736568015]
+texture = ExtResource("2_wc0w5")
+
+[node name="Timer" type="Node" parent="." unique_id=1519330477]
+
+[node name="CarTimer" type="Timer" parent="Timer" unique_id=1309942261]
+wait_time = 0.25
+autostart = true
+
+[node name="Object" type="Node2D" parent="." unique_id=1420081883]
+y_sort_enabled = true
+
+[node name="Player" parent="Object" unique_id=1903340534 instance=ExtResource("3_wc0w5")]
+position = Vector2(-113, 230)
+collision_layer = 2
+collision_mask = 13
+
+[node name="Props" parent="Object" unique_id=1802642334 instance=ExtResource("2_emea3")]
+position = Vector2(-7, 213)
+
+[node name="Props2" parent="Object" unique_id=1622809588 instance=ExtResource("3_emea3")]
+position = Vector2(-58, 213)
+
+[node name="Border" parent="Object" unique_id=1288504359 instance=ExtResource("5_40uiw")]
+collision_mask = 0
+
+[node name="WinArea" type="Area2D" parent="Object" unique_id=1422471935]
+position = Vector2(1, -103)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Object/WinArea" unique_id=370825300]
+position = Vector2(0, -31)
+shape = SubResource("RectangleShape2D_co8bd")
+
+[node name="spawnCars" type="Node2D" parent="." unique_id=1491426168]
+
+[node name="Marker2D13" type="Marker2D" parent="spawnCars" unique_id=478990000]
+position = Vector2(205, -52)
+
+[node name="Marker2D4" type="Marker2D" parent="spawnCars" unique_id=1678880887]
+position = Vector2(203, 164)
+
+[node name="Marker2D11" type="Marker2D" parent="spawnCars" unique_id=270867329]
+position = Vector2(203, 114)
+
+[node name="Marker2D14" type="Marker2D" parent="spawnCars" unique_id=798522595]
+position = Vector2(204, -115)
+
+[node name="Marker2D6" type="Marker2D" parent="spawnCars" unique_id=2113526587]
+position = Vector2(-205, 3)
+
+[node name="Marker2D7" type="Marker2D" parent="spawnCars" unique_id=464331810]
+position = Vector2(-205, -24)
+
+[node name="Marker2D9" type="Marker2D" parent="spawnCars" unique_id=1123383590]
+position = Vector2(-204, 140)
+
+[node name="Marker2D17" type="Marker2D" parent="spawnCars" unique_id=1750296180]
+position = Vector2(-204, 88)
+
+[node name="Marker2D10" type="Marker2D" parent="spawnCars" unique_id=56812991]
+position = Vector2(-205, -96)
+
+[connection signal="timeout" from="Timer/CarTimer" to="." method="_on_car_timer_timeout"]
